@@ -1,0 +1,34 @@
+[build-dependencies]
+pkg-config = "0.3.7"
+
+[dependencies]
+bitflags = "0.4"
+libc = "0.2"
+glib-sys = "^0.3.3"
+gobject-sys = "^0.3.3"
+
+[features]
+v2_34 = []
+v2_36 = ["v2_34"]
+v2_38 = ["v2_36"]
+v2_40 = ["v2_38"]
+v2_42 = ["v2_40"]
+v2_44 = ["v2_42"]
+v2_46 = ["v2_44"]
+v2_48 = ["v2_46"]
+v2_50 = ["v2_48"]
+
+[lib]
+name = "gio_sys"
+
+[package]
+authors = ["The Gtk-rs Project Developers"]
+build = "build.rs"
+description = "FFI bindings to libgio-2.0"
+homepage = "http://gtk-rs.org/"
+keywords = ["gio", "ffi", "gtk-rs", "gnome"]
+license = "MIT"
+links = "gio"
+name = "gio-sys"
+repository = "https://github.com/gtk-rs/sys"
+version = "0.3.3"

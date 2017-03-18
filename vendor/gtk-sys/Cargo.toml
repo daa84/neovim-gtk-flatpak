@@ -1,0 +1,40 @@
+[build-dependencies]
+pkg-config = "0.3.7"
+
+[dependencies]
+bitflags = "0.4"
+libc = "0.2"
+atk-sys = "^0.3.3"
+cairo-sys-rs = "^0.3.3"
+gdk-pixbuf-sys = "^0.3.3"
+gdk-sys = "^0.3.3"
+gio-sys = "^0.3.3"
+glib-sys = "^0.3.3"
+gobject-sys = "^0.3.3"
+pango-sys = "^0.3.3"
+
+[features]
+v3_10 = ["v3_8"]
+v3_12 = ["v3_10"]
+v3_14 = ["v3_12"]
+v3_16 = ["v3_14"]
+v3_18 = ["v3_16"]
+v3_20 = ["v3_18"]
+v3_22 = ["v3_20"]
+v3_6 = []
+v3_8 = ["v3_6"]
+
+[lib]
+name = "gtk_sys"
+
+[package]
+authors = ["The Gtk-rs Project Developers"]
+build = "build.rs"
+description = "FFI bindings to libgtk-3"
+homepage = "http://gtk-rs.org/"
+keywords = ["gtk", "ffi", "gtk-rs", "gnome"]
+license = "MIT"
+links = "gtk"
+name = "gtk-sys"
+repository = "https://github.com/gtk-rs/sys"
+version = "0.3.3"

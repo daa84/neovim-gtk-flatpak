@@ -1,0 +1,27 @@
+[package]
+name = "pangocairo-sys"
+version = "0.1.0"
+authors = ["Reizner Evgeniy <razrfalcon@gmail.com>"]
+description = "Rust bindings for the PangoCairo library"
+repository = "https://github.com/razrfalcon/pangocairo-rs"
+license = "MIT"
+keywords = ["cairo", "pango", "ffi"]
+build = "build.rs"
+
+[dependencies]
+libc = "0.2"
+
+[dependencies.cairo-sys-rs]
+version = "0.3.3"
+
+[dependencies.pango-sys]
+version = "0.3.3"
+
+[dependencies.glib-sys]
+version = "0.3.3"
+
+[build-dependencies]
+pkg-config = "0.3.7"
+
+[lib]
+name = "pangocairo_sys"
