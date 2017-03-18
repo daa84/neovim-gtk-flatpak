@@ -50,7 +50,13 @@
       {
           "name": "neovim-gtk",
 		  "buildsystem": "simple",
-		  "build-commands": ["cargo build --release", "mkdir -p /app/bin", "cp target/release/neovim-gtk /app/bin/neovim-gtk"],
+		  "build-commands": [
+			  "mkdir -p .cargo",
+			  "cp flatpak/cargo-config.toml .cargo/config",
+			  "ln -s flatpak/vendor vendor",
+			  "cargo build --release", 
+			  "mkdir -p /app/bin", 
+			  "cp target/release/neovim-gtk /app/bin/neovim-gtk"],
           "sources": [
               {
                   "type": "git",
