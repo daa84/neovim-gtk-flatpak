@@ -46,6 +46,24 @@
             ]
 
       },
+	  {
+		  "name": "neovim",
+		  "build-options": {
+			  "build-args": ["--share=network"]
+		  },
+		  "buildsystem": "simple",
+		  "build-commands": [
+			  "make BUILD_TYPE=\"Unix Makefiles\" CMAKE_EXTRA_FLAGS=\"-DCMAKE_INSTALL_PREFIX=/app\"",
+			  "make CMAKE_EXTRA_FLAGS=\"-DCMAKE_INSTALL_PREFIX=/app\" install"
+		  ],
+		  "sources": [
+			  {
+				  "type": "git",
+				  "url": "https://github.com/neovim/neovim",
+				  "tag": "v0.1.7"
+			  }
+		  ]
+	  },
       {
           "name": "neovim-gtk",
 		  "buildsystem": "simple",
