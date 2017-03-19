@@ -16,7 +16,7 @@
         /* Enable playing sound thru pulseaudio */
         "--socket=pulseaudio"
     ],
-    "cleanup-commands": [ "/app/lib/rustlib/uninstall.sh"],
+	"cleanup": ["/rustc"],
 	"modules": [
       {
             "name":"rust",
@@ -27,8 +27,7 @@
                     "sha256": "b1e7c818a3cc8b010932f0efc1cf0ede7471958310f808d543b6e32d2ec748e7"
                 },
                 {
-                    "type": "script",
-                    "commands": ["#!/bin/bash", "#empty configure", "exit 0"],
+                    "type": "script", "commands": ["#!/bin/bash", "#empty configure", "exit 0"],
                     "dest-filename": "configure"
                 },
                 {
@@ -36,7 +35,7 @@
                     "commands": ["all:",
                                  "	echo 'Nothing to do'",
                                  "install:", 
-                                 "	./install.sh --prefix=/app"
+                                 "	./install.sh --prefix=/app/rustc"
                                 ],
                     "dest-filename": "Makefile"
                 },
@@ -54,9 +53,10 @@
 			  "mkdir -p .cargo",
 			  "cp flatpak/cargo-config.toml .cargo/config",
 			  "ln -s flatpak/vendor vendor",
-			  "cargo build --release", 
+			  "PATH=$PATH:/app/rustc/bin cargo build --release", 
 			  "mkdir -p /app/bin", 
-			  "cp target/release/neovim-gtk /app/bin/neovim-gtk"],
+			  "cp target/release/neovim-gtk /app/bin/neovim-gtk"
+		  ],
           "sources": [
               {
                   "type": "git",
