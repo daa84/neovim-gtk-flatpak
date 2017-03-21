@@ -66,11 +66,11 @@
 	  },
       {
           "name": "neovim-gtk",
+		  "build-options": {
+			  "build-args": ["--share=network"]
+		  },
 		  "buildsystem": "simple",
 		  "build-commands": [
-			  "mkdir -p .cargo",
-			  "cp flatpak/cargo-config.toml .cargo/config",
-			  "ln -s flatpak/vendor vendor",
 			  "PATH=$PATH:/app/rustc/bin cargo build --release", 
 			  "mkdir -p /app/bin", 
 			  "cp target/release/neovim-gtk /app/bin/neovim-gtk"
