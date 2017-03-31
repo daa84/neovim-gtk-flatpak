@@ -9,11 +9,10 @@
     "finish-args": [
         /* X11 + XShm access */
         "--share=ipc", "--socket=x11",
-	"–device=dri",
         "--socket=wayland",
         /* Full access to filesystem as this is text editor! */
         "--filesystem=host:rw",
-	"--filesystem=~/.config/nvim:ro",
+		"--filesystem=~/.config/nvim:ro",
         /* Needs to talk to the network: */
         "--share=network",
         /* Enable playing sound thru pulseaudio */
