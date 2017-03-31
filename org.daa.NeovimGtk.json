@@ -3,14 +3,17 @@
     "runtime": "org.gnome.Platform",
     "runtime-version": "3.22",
     "sdk": "org.gnome.Sdk",
-    "command": "neovim-gtk",
+    "command": "nvim-gtk",
+    "rename-desktop-file": "nvim-gtk.desktop",
+    "rename-icon": "nvim-gtk",
     "finish-args": [
         /* X11 + XShm access */
         "--share=ipc", "--socket=x11",
-        /* Wayland access */
+	"–device=dri",
         "--socket=wayland",
-        /* We don't want full fs access so we can read the files */
+        /* Full access to filesystem as this is text editor! */
         "--filesystem=host:rw",
+	"--filesystem=~/.config/nvim:ro
         /* Needs to talk to the network: */
         "--share=network",
         /* Enable playing sound thru pulseaudio */
@@ -82,8 +85,7 @@
 		  "buildsystem": "simple",
 		  "build-commands": [
 			  "PATH=$PATH:/app/rustc/bin cargo build --release", 
-			  "mkdir -p /app/bin", 
-			  "cp target/release/neovim-gtk /app/bin/neovim-gtk"
+			  "PREFIX=\"/app\" make install"			  
 		  ],
           "sources": [
               {
