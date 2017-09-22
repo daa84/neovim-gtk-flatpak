@@ -1,32 +1,48 @@
 {
     "app-id": "org.daa.NeovimGtk",
     "runtime": "org.gnome.Platform",
-    "runtime-version": "3.22",
+    "runtime-version": "3.24",
     "sdk": "org.gnome.Sdk",
     "command": "nvim-gtk",
-    "rename-desktop-file": "nvim-gtk.desktop",
-    "rename-icon": "nvim-gtk",
     "finish-args": [
-        /* X11 + XShm access */
-        "--share=ipc", "--socket=x11",
+        "--share=ipc",
+	"--socket=x11",
         "--socket=wayland",
-        /* Full access to filesystem as this is text editor! */
         "--filesystem=host:rw",
-		"--filesystem=~/.config/nvim:ro",
-        /* Needs to talk to the network: */
+	"--filesystem=~/.config/nvim:ro",
         "--share=network",
-        /* Enable playing sound thru pulseaudio */
         "--socket=pulseaudio"
     ],
-	"cleanup": ["/rustc"],
+	"cleanup": ["/app/rustc"],
 	"modules": [
       {
             "name":"rust",
             "sources": [
+		    
+            "sources": [
                 {
                     "type": "archive",
-                    "url": "https://static.rust-lang.org/dist/rust-1.15.1-x86_64-unknown-linux-gnu.tar.gz",
-                    "sha256": "b1e7c818a3cc8b010932f0efc1cf0ede7471958310f808d543b6e32d2ec748e7"
+                    "only-arches": ["i386"],
+                    "url": "https://static.rust-lang.org/dist/rust-1.20.0-i686-unknown-linux-gnu.tar.gz",
+                    "sha256": "abe592e06616cdc2fcca56ddbe482050dd49a1fada35e2af031c64fe6eb14668"
+                },
+                {
+                    "type": "archive",
+                    "only-arches": ["arm"],
+                    "url": "https://static.rust-lang.org/dist/rust-1.20.0-arm-unknown-linux-gnueabihf.tar.gz",
+                    "sha256": "d8282b04619acdcbb5259ba5a3c8677716a015cfef3ba68ba24211590c5bb5dc"
+                },
+                {
+                    "type": "archive",
+                    "only-arches": ["aarch64"],
+                    "url": "https://static.rust-lang.org/dist/rust-1.20.0-aarch64-unknown-linux-gnu.tar.gz",
+                    "sha256": "eaab3df489d4d8f976c4327d812b9870730eed6d0bbd52712767083d02be7472"
+                },
+                {
+                    "type": "archive",
+                    "only-arches": ["x86_64"],
+                    "url": "https://static.rust-lang.org/dist/rust-1.20.0-x86_64-unknown-linux-gnu.tar.gz",
+                    "sha256": "ca1cf3aed73ff03d065a7d3e57ecca92228d35dc36d9274a6597441319f18eb8"
                 },
                 {
                     "type": "script", "commands": ["#!/bin/bash", "#empty configure", "exit 0"],
