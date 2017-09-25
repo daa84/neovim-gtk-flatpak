@@ -98,33 +98,6 @@
             ]
         },
 
-        /* remove? */
-        {
-            "name": "lua",
-            "buildsystem": "simple",
-            "build-commands": [
-                "make linux", 
-                "make INSTALL_TOP=\"/app\" install"			  
-            ],
-            "sources": [
-                {
-                    "type": "archive",
-                    "url": "https://www.lua.org/ftp/lua-5.1.5.tar.gz",
-                    "sha256": "2640fc56a795f29d28ef15e13c34a47e223960b0240e8cb0a82d9b0738695333"
-                }
-            ]
-        },
-        {
-            "name": "luarocks",
-            "sources": [
-                {
-                    "type": "archive",
-                    "url": "https://github.com/luarocks/luarocks/archive/v2.4.2.tar.gz",
-                    "sha256": "eef88c2429c715a7beb921e4b1ba571dddb7c74a250fbb0d3cc0d4be7a5865d9"
-                }
-            ]
-        },
-
         {
             "name": "unibilium",
             "buildsystem": "simple",
@@ -185,18 +158,6 @@
         },
 
         {
-            "name": "luv",
-            "buildsystem": "cmake",
-            "sources": [
-                {
-                    "type": "archive",
-                    "url": "https://github.com/luvit/luv/archive/1.9.1-1.tar.gz",
-                    "sha256": "562b9efaad30aa051a40eac9ade0c3df48bb8186763769abe47ec3fb3edb1268"
-                }
-            ]
-        },
-
-        {
             "name": "gperf",
             "sources": [
                 {
@@ -207,11 +168,33 @@
             ]
         },
 
+	{
+            "name": "luarocks",
+            "buildsystem": "simple",
+            "build-commands": [
+	        "./configure --with-lua=/app --prefix=/app --lua-suffix=jit --with-lua-include=/app/include/luajit-2.0 --force-config",
+		"make build",
+		"make install",
+	        "luarocks install lpeg 1.0.1-1",
+		"luarocks install mpack 1.0.6-0"
+            ],
+            "build-options": {
+                "build-args": ["--share=network"]
+            },
+            "sources": [
+                {
+                    "type": "archive",
+                    "url": "https://github.com/luarocks/luarocks/archive/v2.4.2.tar.gz",
+                    "sha256": "eef88c2429c715a7beb921e4b1ba571dddb7c74a250fbb0d3cc0d4be7a5865d9"
+                }
+            ]
+	},
+
         {
             "name": "neovim",
             "buildsystem": "simple",
             "build-commands": [
-                "make BUILD_TYPE=\"Unix Makefiles\" CMAKE_EXTRA_FLAGS=\"-DCMAKE_INSTALL_PREFIX=/app\"",
+                "make BUILD_TYPE=\"Unix Makefiles\" CMAKE_BUILD_TYPE=Release USE_BUNDLED_DEPS=OFF CMAKE_EXTRA_FLAGS=\"-DCMAKE_INSTALL_PREFIX=/app\"",
                 "make BUILD_TYPE=\"Unix Makefiles\" CMAKE_EXTRA_FLAGS=\"-DCMAKE_INSTALL_PREFIX=/app\" install"
             ],
             "sources": [
