@@ -168,19 +168,14 @@
             ]
         },
 
-	{
+        {
             "name": "luarocks",
             "buildsystem": "simple",
             "build-commands": [
-	        "./configure --with-lua=/app --prefix=/app --lua-suffix=jit --with-lua-include=/app/include/luajit-2.0 --force-config",
-		"make build",
-		"make install",
-	        "luarocks install lpeg 1.0.1-1",
-		"luarocks install mpack 1.0.6-0"
+                "./configure --with-lua=/app --prefix=/app --lua-suffix=jit --with-lua-include=/app/include/luajit-2.0 --force-config",
+                "make build",
+                "make install"
             ],
-            "build-options": {
-                "build-args": ["--share=network"]
-            },
             "sources": [
                 {
                     "type": "archive",
@@ -188,7 +183,19 @@
                     "sha256": "eef88c2429c715a7beb921e4b1ba571dddb7c74a250fbb0d3cc0d4be7a5865d9"
                 }
             ]
-	},
+        },
+
+        {
+            "name": "luarucks-mods",
+            "buildsystem": "simple",
+            "build-options": {
+                "build-args": ["--share=network"]
+            },
+            "build-commands": [
+                "luarocks build lpeg 1.0.1-1",
+                "luarocks build mpack 1.0.6-0"
+            ]
+        },
 
         {
             "name": "neovim",
