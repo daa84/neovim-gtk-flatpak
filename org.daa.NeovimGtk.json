@@ -86,6 +86,7 @@
             "name": "LuaJIT",
             "buildsystem": "simple",
             "build-commands": [
+                "sed -i \"s|/usr/local|/app|\" ./src/luaconf.h",
                 "make", 
                 "make PREFIX=\"/app\" install"			  
             ],
