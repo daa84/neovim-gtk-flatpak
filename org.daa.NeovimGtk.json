@@ -16,39 +16,6 @@
     "cleanup": ["/app/rustc"],
     "modules": [
         {
-            "name":"rust",
-            "sources": [
-                {
-                    "type": "archive",
-                    "only-arches": ["i386"],
-                    "url": "https://static.rust-lang.org/dist/rust-1.20.0-i686-unknown-linux-gnu.tar.gz",
-                    "sha256": "abe592e06616cdc2fcca56ddbe482050dd49a1fada35e2af031c64fe6eb14668"
-                },
-                {
-                    "type": "archive",
-                    "only-arches": ["arm"],
-                    "url": "https://static.rust-lang.org/dist/rust-1.20.0-arm-unknown-linux-gnueabihf.tar.gz",
-                    "sha256": "d8282b04619acdcbb5259ba5a3c8677716a015cfef3ba68ba24211590c5bb5dc"
-                },
-                {
-                    "type": "archive",
-                    "only-arches": ["aarch64"],
-                    "url": "https://static.rust-lang.org/dist/rust-1.20.0-aarch64-unknown-linux-gnu.tar.gz",
-                    "sha256": "eaab3df489d4d8f976c4327d812b9870730eed6d0bbd52712767083d02be7472"
-                },
-                {
-                    "type": "archive",
-                    "only-arches": ["x86_64"],
-                    "url": "https://static.rust-lang.org/dist/rust-1.20.0-x86_64-unknown-linux-gnu.tar.gz",
-                    "sha256": "ca1cf3aed73ff03d065a7d3e57ecca92228d35dc36d9274a6597441319f18eb8"
-                }
-            ],
-            "buildsystem": "simple",
-            "build-commands": [
-                "./install.sh --prefix=/app/rustc"
-            ]
-        },
-        {
             "name": "libtool",
             "sources": [
                 {
@@ -203,7 +170,7 @@
             "buildsystem": "simple",
             "build-commands": [
                 "make BUILD_TYPE=\"Unix Makefiles\" CMAKE_BUILD_TYPE=Release USE_BUNDLED_DEPS=OFF CMAKE_EXTRA_FLAGS=\"-DCMAKE_INSTALL_PREFIX=/app\"",
-                "make BUILD_TYPE=\"Unix Makefiles\" CMAKE_EXTRA_FLAGS=\"-DCMAKE_INSTALL_PREFIX=/app\" install"
+                "make BUILD_TYPE=\"Unix Makefiles\" CMAKE_BUILD_TYPE=Release USE_BUNDLED_DEPS=OFF CMAKE_EXTRA_FLAGS=\"-DCMAKE_INSTALL_PREFIX=/app\" install"
             ],
             "sources": [
                 {
@@ -214,20 +181,54 @@
             ]
         },
         {
+            "name":"rust",
+            "sources": [
+                {
+                    "type": "archive",
+                    "only-arches": ["i386"],
+                    "url": "https://static.rust-lang.org/dist/rust-1.20.0-i686-unknown-linux-gnu.tar.gz",
+                    "sha256": "abe592e06616cdc2fcca56ddbe482050dd49a1fada35e2af031c64fe6eb14668"
+                },
+                {
+                    "type": "archive",
+                    "only-arches": ["arm"],
+                    "url": "https://static.rust-lang.org/dist/rust-1.20.0-arm-unknown-linux-gnueabihf.tar.gz",
+                    "sha256": "d8282b04619acdcbb5259ba5a3c8677716a015cfef3ba68ba24211590c5bb5dc"
+                },
+                {
+                    "type": "archive",
+                    "only-arches": ["aarch64"],
+                    "url": "https://static.rust-lang.org/dist/rust-1.20.0-aarch64-unknown-linux-gnu.tar.gz",
+                    "sha256": "eaab3df489d4d8f976c4327d812b9870730eed6d0bbd52712767083d02be7472"
+                },
+                {
+                    "type": "archive",
+                    "only-arches": ["x86_64"],
+                    "url": "https://static.rust-lang.org/dist/rust-1.20.0-x86_64-unknown-linux-gnu.tar.gz",
+                    "sha256": "ca1cf3aed73ff03d065a7d3e57ecca92228d35dc36d9274a6597441319f18eb8"
+                }
+            ],
+            "buildsystem": "simple",
+            "build-commands": [
+                "./install.sh --prefix=/app"
+            ]
+        },
+        {
             "name": "neovim-gtk",
             "build-options": {
                 "build-args": ["--share=network"]
             },
             "buildsystem": "simple",
             "build-commands": [
-                "PATH=$PATH:/app/rustc/bin cargo build --release", 
+                "cargo build --release", 
                 "PREFIX=\"/app\" make install"			  
             ],
             "sources": [
                 {
                     "type": "git",
                     "url": "https://github.com/daa84/neovim-gtk",
-                    "branch" : "master"
+                    "branch": "master",
+                    "commit": "37148176047be017dded18473aaeb3b46daa06f7"
                 }
             ]
         }
