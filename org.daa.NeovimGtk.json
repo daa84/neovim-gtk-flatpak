@@ -204,13 +204,13 @@
                 {
                     "type": "archive",
                     "only-arches": ["x86_64"],
-                    "url": "https://static.rust-lang.org/dist/rust-1.20.0-x86_64-unknown-linux-gnu.tar.gz",
-                    "sha256": "ca1cf3aed73ff03d065a7d3e57ecca92228d35dc36d9274a6597441319f18eb8"
+                    "url": "https://static.rust-lang.org/dist/rust-1.21.0-x86_64-unknown-linux-gnu.tar.gz",
+                    "sha256": "b41e70e018402bc04d02fde82f91bea24428e6be432f0df12ac400cfb03108e8"
                 }
             ],
             "buildsystem": "simple",
             "build-commands": [
-                "./install.sh --prefix=/app"
+	        "./install.sh --prefix=/app/rust --disable-ldconfig --verbose"
             ]
         },
         {
@@ -220,15 +220,14 @@
             },
             "buildsystem": "simple",
             "build-commands": [
-                "cargo build --release", 
+                "PATH=$PATH:/app/rust/bin cargo build --release", 
                 "PREFIX=\"/app\" make install"			  
             ],
             "sources": [
                 {
                     "type": "git",
                     "url": "https://github.com/daa84/neovim-gtk",
-                    "branch": "master",
-                    "commit": "37148176047be017dded18473aaeb3b46daa06f7"
+                    "branch": "master"
                 }
             ]
         }
