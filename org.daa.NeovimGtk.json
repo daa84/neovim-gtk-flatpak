@@ -41,6 +41,7 @@
                 }
             ]
         },
+
         /* Neovim dependencies from third-party */
         {
             "name": "libuv",
@@ -78,38 +79,6 @@
                     "type": "archive",
                     "url": "https://github.com/LuaJIT/LuaJIT/archive/82151a4514e6538086f3f5e01cb8d4b22287b14f.tar.gz",
                     "sha256": "8bc4e96ebab74e12ab84e751360e864714289bb089b51b6f396fa9a97df69798"
-                }
-            ]
-        },
-
-        {
-            "name": "unibilium",
-            "buildsystem": "simple",
-            "build-commands": [
-                "make", 
-                "make PREFIX=\"/app\" install"			  
-            ],
-            "sources": [
-                {
-                    "type": "archive",
-                    "url": "https://github.com/mauke/unibilium/archive/v1.2.0.tar.gz",
-                    "sha256": "623af1099515e673abfd3cae5f2fa808a09ca55dda1c65a7b5c9424eb304ead8"
-                }
-            ]
-        },
-
-        {
-            "name": "libtermkey",
-            "buildsystem": "simple",
-            "build-commands": [
-                "make", 
-                "make PREFIX=\"/app\" install"			  
-            ],
-            "sources": [
-                {
-                    "type": "archive",
-                    "url": "http://www.leonerd.org.uk/code/libtermkey/libtermkey-0.20.tar.gz",
-                    "sha256": "6c0d87c94ab9915e76ecd313baec08dedf3bd56de83743d9aa923a081935d2f5"
                 }
             ]
         },
@@ -190,8 +159,8 @@
             "name": "neovim",
             "buildsystem": "simple",
             "build-commands": [
-                "make BUILD_TYPE=\"Unix Makefiles\" CMAKE_BUILD_TYPE=Release USE_BUNDLED_DEPS=OFF CMAKE_EXTRA_FLAGS=\"-DCMAKE_INSTALL_PREFIX=/app\"",
-                "make BUILD_TYPE=\"Unix Makefiles\" CMAKE_BUILD_TYPE=Release USE_BUNDLED_DEPS=OFF CMAKE_EXTRA_FLAGS=\"-DCMAKE_INSTALL_PREFIX=/app\" install"
+                "make BUILD_TYPE=\"Unix Makefiles\" CMAKE_BUILD_TYPE=Release USE_BUNDLED_DEPS=OFF CMAKE_EXTRA_FLAGS=\"-DCMAKE_INSTALL_PREFIX=/app -DFEAT_TUI=OFF\" ",
+                "make BUILD_TYPE=\"Unix Makefiles\" CMAKE_BUILD_TYPE=Release USE_BUNDLED_DEPS=OFF CMAKE_EXTRA_FLAGS=\"-DCMAKE_INSTALL_PREFIX=/app -DFEAT_TUI=OFF\" install"
             ],
             "sources": [
                 {
@@ -201,6 +170,30 @@
                 }
             ]
         },
+
+        {
+            "name": "git",
+            "buildsystem": "simple",
+            "build-commands": [
+                "make configure",
+                "./configure --prefix=/app",
+                "make all",
+                "make install"
+            ],
+            "build-options": {
+                "strip": false,
+                "no-debuginfo": true,
+                "no-debuginfo-compression": true
+            },
+            "sources": [
+                {
+                    "type": "archive",
+                    "url": "https://www.kernel.org/pub/software/scm/git/git-2.14.2.tar.gz",
+                    "sha256": "a03a12331d4f9b0f71733db9f47e1232d4ddce00e7f2a6e20f6ec9a19ce5ff61"
+                }
+            ]
+        },
+
         {
             "name":"rust",
             "sources": [
@@ -208,19 +201,19 @@
                     "type": "archive",
                     "only-arches": ["i386"],
                     "url": "https://static.rust-lang.org/dist/rust-1.21.0-i686-unknown-linux-gnu.tar.gz",
-                    "sha256": "abe592e06616cdc2fcca56ddbe482050dd49a1fada35e2af031c64fe6eb14668"
+                    "sha256": "b7caed0f602cdb8ef22e0bfa9125a65bec411e15c0b8901d937e43303ec7dbee"
                 },
                 {
                     "type": "archive",
                     "only-arches": ["arm"],
                     "url": "https://static.rust-lang.org/dist/rust-1.21.0-arm-unknown-linux-gnueabihf.tar.gz",
-                    "sha256": "d8282b04619acdcbb5259ba5a3c8677716a015cfef3ba68ba24211590c5bb5dc"
+                    "sha256": "add0b9c2fae88b9d84e5a25ebf09a9805010aaddd6e2584e41b5822ba8e51dd9"
                 },
                 {
                     "type": "archive",
                     "only-arches": ["aarch64"],
                     "url": "https://static.rust-lang.org/dist/rust-1.21.0-aarch64-unknown-linux-gnu.tar.gz",
-                    "sha256": "eaab3df489d4d8f976c4327d812b9870730eed6d0bbd52712767083d02be7472"
+                    "sha256": "491ee6c43cc672006968d665bd34c94cc2219ef3592d93d38097c97eaaa864c3"
                 },
                 {
                     "type": "archive",
