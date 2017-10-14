@@ -5,15 +5,31 @@
     "sdk": "org.gnome.Sdk",
     "command": "nvim-gtk",
     "finish-args": [
-        "--share=ipc",
-        "--socket=x11",
+        "--share=ipc", "--socket=x11",
         "--socket=wayland",
-        "--filesystem=host:rw",
+        "--filesystem=host",
         "--filesystem=~/.config/nvim:ro",
         "--share=network",
-        "--socket=pulseaudio"
+        "--socket=pulseaudio",
+        /* Needed for dconf to work */
+        "--filesystem=xdg-run/dconf", "--filesystem=~/.config/dconf:ro",
+        "--talk-name=ca.desrt.dconf", "--env=DCONF_USER_CONFIG_DIR=.config/dconf"
     ],
-    "cleanup": ["/app/rustc"],
+    "cleanup": [
+        "/rust",
+        "/bin/luarocks*",
+        "/share/luarocks",
+        "/include",
+        "/etc",
+        "/lib/pkgconfig",
+        "/share/doc",
+        "/share/man",
+        "*.la", "*.a"
+    ],
+    "build-options" : {
+        "cflags": "-O2 -g",
+        "cxxflags": "-O2 -g"
+    },
     "modules": [
         {
             "name": "libtool",
@@ -144,6 +160,11 @@
                 "make build",
                 "make install"
             ],
+            "build-options": {
+                "strip": false,
+                "no-debuginfo": true,
+                "no-debuginfo-compression": true
+            },
             "sources": [
                 {
                     "type": "archive",
@@ -176,7 +197,7 @@
                 {
                     "type": "git",
                     "url": "https://github.com/neovim/neovim",
-                    "branch": "v0.2.0"
+                    "tag": "v0.2.0"
                 }
             ]
         },
@@ -186,19 +207,19 @@
                 {
                     "type": "archive",
                     "only-arches": ["i386"],
-                    "url": "https://static.rust-lang.org/dist/rust-1.20.0-i686-unknown-linux-gnu.tar.gz",
+                    "url": "https://static.rust-lang.org/dist/rust-1.21.0-i686-unknown-linux-gnu.tar.gz",
                     "sha256": "abe592e06616cdc2fcca56ddbe482050dd49a1fada35e2af031c64fe6eb14668"
                 },
                 {
                     "type": "archive",
                     "only-arches": ["arm"],
-                    "url": "https://static.rust-lang.org/dist/rust-1.20.0-arm-unknown-linux-gnueabihf.tar.gz",
+                    "url": "https://static.rust-lang.org/dist/rust-1.21.0-arm-unknown-linux-gnueabihf.tar.gz",
                     "sha256": "d8282b04619acdcbb5259ba5a3c8677716a015cfef3ba68ba24211590c5bb5dc"
                 },
                 {
                     "type": "archive",
                     "only-arches": ["aarch64"],
-                    "url": "https://static.rust-lang.org/dist/rust-1.20.0-aarch64-unknown-linux-gnu.tar.gz",
+                    "url": "https://static.rust-lang.org/dist/rust-1.21.0-aarch64-unknown-linux-gnu.tar.gz",
                     "sha256": "eaab3df489d4d8f976c4327d812b9870730eed6d0bbd52712767083d02be7472"
                 },
                 {
@@ -208,9 +229,14 @@
                     "sha256": "b41e70e018402bc04d02fde82f91bea24428e6be432f0df12ac400cfb03108e8"
                 }
             ],
+            "build-options": {
+                "strip": false,
+                "no-debuginfo": true,
+                "no-debuginfo-compression": true
+            },
             "buildsystem": "simple",
             "build-commands": [
-	        "./install.sh --prefix=/app/rust --disable-ldconfig --verbose"
+                "./install.sh --prefix=/app/rust --disable-ldconfig --verbose"
             ]
         },
         {
@@ -220,8 +246,7 @@
             },
             "buildsystem": "simple",
             "build-commands": [
-                "PATH=$PATH:/app/rust/bin cargo build --release", 
-                "PREFIX=\"/app\" make install"			  
+                "PATH=$PATH:/app/rust/bin make PREFIX=\"/app\" install"
             ],
             "sources": [
                 {
