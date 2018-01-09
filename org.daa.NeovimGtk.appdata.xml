@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<component type="desktop-application">
+    <id>org.daa.NeovimGtk</id>
+    <metadata_license>FSFAP</metadata_license>
+    <project_license>GPL-3.0+</project_license>
+    <name>Neovim Gtk</name>
+    <summary>Gtk gui for neovim</summary>
+
+    <description>
+        Gtk gui neovim client. Use neovim as backend.
+    </description>
+
+    <launchable type="desktop-id">org.daa.NeovimGtk.desktop</launchable>
+
+    <screenshots>
+        <screenshot type="default">
+            <caption>Main window</caption>
+            <image>https://raw.githubusercontent.com/daa84/neovim-gtk/master/screenshots/neovimgtk-screen.png</image>
+        </screenshot>
+    </screenshots>
+
+    <url type="homepage">https://github.com/daa84/neovim-gtk</url>
+
+    <provides>
+        <binary>nvim-gtk</binary>
+    </provides>
+</component>

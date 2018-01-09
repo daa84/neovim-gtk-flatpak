@@ -3,6 +3,7 @@
     "runtime": "org.gnome.Platform",
     "runtime-version": "3.24",
     "sdk": "org.gnome.Sdk",
+    "sdk-extensions": ["org.freedesktop.Sdk.Extension.rust-stable"],
     "command": "nvim-gtk",
     "finish-args": [
         "--share=ipc", "--socket=x11",
@@ -16,7 +17,6 @@
         "--talk-name=ca.desrt.dconf", "--env=DCONF_USER_CONFIG_DIR=.config/dconf"
     ],
     "cleanup": [
-        "/rust",
         "/bin/luarocks*",
         "/share/luarocks",
         "/include",
@@ -166,7 +166,7 @@
                 {
                     "type": "git",
                     "url": "https://github.com/neovim/neovim",
-                    "tag": "v0.2.0"
+                    "tag": "v0.2.2"
                 }
             ]
         },
@@ -195,47 +195,13 @@
         },
 
         {
-            "name":"rust",
-            "sources": [
-                {
-                    "type": "archive",
-                    "only-arches": ["i386"],
-                    "url": "https://static.rust-lang.org/dist/rust-1.21.0-i686-unknown-linux-gnu.tar.gz",
-                    "sha256": "b7caed0f602cdb8ef22e0bfa9125a65bec411e15c0b8901d937e43303ec7dbee"
-                },
-                {
-                    "type": "archive",
-                    "only-arches": ["arm"],
-                    "url": "https://static.rust-lang.org/dist/rust-1.21.0-arm-unknown-linux-gnueabihf.tar.gz",
-                    "sha256": "add0b9c2fae88b9d84e5a25ebf09a9805010aaddd6e2584e41b5822ba8e51dd9"
-                },
-                {
-                    "type": "archive",
-                    "only-arches": ["aarch64"],
-                    "url": "https://static.rust-lang.org/dist/rust-1.21.0-aarch64-unknown-linux-gnu.tar.gz",
-                    "sha256": "491ee6c43cc672006968d665bd34c94cc2219ef3592d93d38097c97eaaa864c3"
-                },
-                {
-                    "type": "archive",
-                    "only-arches": ["x86_64"],
-                    "url": "https://static.rust-lang.org/dist/rust-1.21.0-x86_64-unknown-linux-gnu.tar.gz",
-                    "sha256": "b41e70e018402bc04d02fde82f91bea24428e6be432f0df12ac400cfb03108e8"
-                }
-            ],
-            "build-options": {
-                "strip": false,
-                "no-debuginfo": true,
-                "no-debuginfo-compression": true
-            },
-            "buildsystem": "simple",
-            "build-commands": [
-                "./install.sh --prefix=/app/rust --disable-ldconfig --verbose"
-            ]
-        },
-        {
             "name": "neovim-gtk",
             "build-options": {
                 "build-args": ["--share=network"]
+                "append-path": "/usr/lib/sdk/rust-stable/bin",
+                "env": {
+                    "CARGO_HOME": "/run/build/NeovimGtk/cargo"
+                }
             },
             "buildsystem": "simple",
             "build-commands": [
