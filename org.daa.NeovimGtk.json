@@ -197,7 +197,7 @@
         {
             "name": "neovim-gtk",
             "build-options": {
-                "build-args": ["--share=network"]
+                "build-args": ["--share=network"],
                 "append-path": "/usr/lib/sdk/rust-stable/bin",
                 "env": {
                     "CARGO_HOME": "/run/build/NeovimGtk/cargo"
