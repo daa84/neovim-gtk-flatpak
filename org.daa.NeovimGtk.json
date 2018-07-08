@@ -1,7 +1,7 @@
 {
     "app-id": "org.daa.NeovimGtk",
     "runtime": "org.gnome.Platform",
-    "runtime-version": "3.24",
+    "runtime-version": "3.28",
     "sdk": "org.gnome.Sdk",
     "sdk-extensions": ["org.freedesktop.Sdk.Extension.rust-stable"],
     "command": "nvim-gtk",
@@ -60,8 +60,8 @@
             "sources": [
                 {
                     "type": "archive",
-                    "url": "https://github.com/msgpack/msgpack-c/archive/cpp-2.1.3.tar.gz",
-                    "sha256": "42ff5c213fd24bd4388c45c1f21d84b476678ce6366ea4d4f4086618a1d2cd23"
+                    "url": "https://github.com/msgpack/msgpack-c/releases/download/cpp-3.0.0/msgpack-3.0.0.tar.gz",
+                    "sha256": "bfbb71b7c02f806393bc3cbc491b40523b89e64f83860c58e3e54af47de176e4"
                 }
             ]
         },
@@ -77,8 +77,8 @@
             "sources": [
                 {
                     "type": "archive",
-                    "url": "https://github.com/LuaJIT/LuaJIT/archive/82151a4514e6538086f3f5e01cb8d4b22287b14f.tar.gz",
-                    "sha256": "8bc4e96ebab74e12ab84e751360e864714289bb089b51b6f396fa9a97df69798"
+                    "url": "https://github.com/LuaJIT/LuaJIT/archive/7dbf0b05f1228c1c719866db5e5f3d58f87f74c8.tar.gz",
+                    "sha256": "cbae019b5e396164eb5f0d07777b55cc03931bb944f83c61a010c053c9f5fd5b"
                 }
             ]
         },
@@ -137,8 +137,8 @@
             "sources": [
                 {
                     "type": "archive",
-                    "url": "https://github.com/luarocks/luarocks/archive/v2.4.2.tar.gz",
-                    "sha256": "eef88c2429c715a7beb921e4b1ba571dddb7c74a250fbb0d3cc0d4be7a5865d9"
+                    "url": "https://github.com/luarocks/luarocks/archive/v2.4.4.tar.gz",
+                    "sha256": "9eb3d0738fd02ad8bf39bcedccac4e83e9b5fff2bcca247c3584b925b2075d9c"
                 }
             ]
         },
@@ -151,7 +151,7 @@
             },
             "build-commands": [
                 "luarocks build lpeg 1.0.1-1",
-                "luarocks build mpack 1.0.6-0"
+                "luarocks build mpack 1.0.7-0"
             ]
         },
 
@@ -166,7 +166,7 @@
                 {
                     "type": "git",
                     "url": "https://github.com/neovim/neovim",
-                    "tag": "v0.2.2"
+                    "tag": "v0.3.0"
                 }
             ]
         },
@@ -188,11 +188,27 @@
             "sources": [
                 {
                     "type": "archive",
-                    "url": "https://www.kernel.org/pub/software/scm/git/git-2.14.2.tar.gz",
-                    "sha256": "a03a12331d4f9b0f71733db9f47e1232d4ddce00e7f2a6e20f6ec9a19ce5ff61"
+                    "url": "https://www.kernel.org/pub/software/scm/git/git-2.18.0.tar.gz",
+                    "sha256": "94faf2c0b02a7920b0b46f4961d8e9cad08e81418614102898a55f980fa3e7e4"
                 }
             ]
         },
+
+	{
+	    "name": "vim-plug",
+	    "buildsystem": "simple",
+	    "build-commands": [
+		"mkdir -p /app/share/nvim/site/autoload",
+		"cp plug.vim /app/share/nvim/site/autoload/"
+	    ],
+	    "sources": [
+		{
+		    "type": "git",
+		    "url": "https://github.com/junegunn/vim-plug",
+		    "commit": "e0ca037a4fe6d3b2d0b85ceec9b69670cc9db2bc"
+		}
+	    ]
+	},
 
         {
             "name": "neovim-gtk",

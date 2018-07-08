@@ -7,7 +7,7 @@ After installation NeovimGtk can be found at application menu or can be run from
 This package requires gnome platform:
 ```
 flatpak remote-add --if-not-exists flathub https://dl.flathub.org/repo/flathub.flatpakrepo
-flatpak install flathub org.gnome.Platform//3.24
+flatpak install flathub org.gnome.Platform//3.28
 ```
 
 [![Github All Releases](https://img.shields.io/github/downloads/daa84/neovim-gtk-flatpak/total.svg)]()
@@ -16,4 +16,4 @@ flatpak install flathub org.gnome.Platform//3.24
 # NeovimGtk configuration
 nvim and nvim-gtk configuration files (`init.vim` `ginit.vim`) stored at `~/.var/app/org.daa.NeovimGtk/config/nvim/`.
 autoload configuration stored at `~/.var/app/org.daa.NeovimGtk/data/nvim/site/autoload`.
-This package contains also git to allow autoinstall of vim plugins. So you can just put `plug.vim` at autoload directory and start using it.
+This package contains also git and `plug.vim` to allow autoinstall of vim plugins.
